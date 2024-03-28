@@ -1,2 +1,7 @@
-# Study_Algorithm
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+# 자료구조 및 알고리즘 기록
+
+데이터를 효율적으로 사용할 수 있는 개발자가 되기 위해
+
+## 자료구조
+
+## 알고리즘
