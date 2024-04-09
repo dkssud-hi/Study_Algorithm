@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 정규식 풀이
+      function solution_reg(s, t) {
+        let regex = new RegExp(t, "g");
+        let answer = s.match(regex);
+        return answer.length;
+      }
+
+      function solution_riter(s, t) {
+        let answer = 0;
+        let str_arr = s.split("");
+        str_arr.forEach((element) => {
+          if (element === t) answer++;
+        });
+
+        return answer;
+      }
+
+      let str = "COMPUTERPROGRAMMING";
+      console.log("정규식 풀이 ", solution_reg(str, "R"));
+      console.log("반복문 풀이 ", solution_riter(str, "R"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      //에러 메시지
+      const NOT_EXIST_CAP_LETTER = new Error("대문자가 존재하지 않습니다.");
+
+      //정규표현식
+      function solution(s) {
+        let regex = new RegExp("[A-Z]", "g");
+        let answer = s.match(regex);
+
+        if (answer === null) {
+          throw NOT_EXIST_CAP_LETTER;
+        } else {
+          return answer.length;
+        }
+      }
+
+      //유니코드로 영어대문자 찾기
+      function solution_uni(s) {
+        let answer = 0;
+        for (let char of s) {
+          let char_uni = char.charCodeAt();
+          if (char_uni >= 65 && char_uni <= 95) answer++;
+        }
+
+        if (answer > 0) return answer;
+        else throw NOT_EXIST_CAP_LETTER;
+      }
+
+      //toUpperCase로 대문자 판별
+      function solution_toUpper(s) {
+        let answer = 0;
+        for (char of s) {
+          if (char === char.toUpperCase()) answer++;
+        }
+
+        if (answer > 0) return answer;
+        else throw NOT_EXIST_CAP_LETTER;
+      }
+
+      let str = "Koreatimegood";
+      try {
+        console.log("정규표현식 해결", solution(str));
+        console.log("유니코드 해결", solution_uni(str));
+        console.log("toUpperCase로 해결", solution_toUpper(str));
+      } catch (error) {
+        console.log(error);
+      }
+    </script>
+  </body>
+</html>
