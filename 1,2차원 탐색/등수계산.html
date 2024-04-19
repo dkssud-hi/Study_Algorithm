@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 국어점수를 의미하는 N개의 정수가 입력 된다.
+      // 같은 점수가 입력될 경우 높은 등수로 동일 처리한다.
+      // 즉 가장 높은 점수가 92점인데 92점이 3명 존재하면 1등이 3명이고 그 다음 학생은 4등이 된다.
+      // 입력된 순서대로 등수를 출력
+      function solution(arr) {
+        let n = arr.length;
+        let answer = Array.from({ length: n }, () => 1);
+
+        arr.forEach((score, idx) => {
+          let winners = arr.filter((x) => x > score);
+          answer[idx] += winners.length;
+        });
+        return answer;
+      }
+
+      let arr = [87, 89, 92, 100, 76];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
