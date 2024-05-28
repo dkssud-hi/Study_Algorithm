@@ -1,30 +1,40 @@
 function solution(maps) {
-    var que =[[0,0,1]]; // 시작 노드
-    var y_goal = maps.length-1;
-    var x_goal = maps[0].length-1;
+    function Location_info(location, distance){
+        this.location = location;
+        this.distance = distance;
+    }
     
-    while(que.length !== 0){
+    const ENEMY_XPOINT = maps[0].length-1;
+    const ENEMY_YPOINT = maps.length-1;
+    let willVisit = [new Location_info([0,0], 1)];
+    
+    while(willVisit.length !== 0){
+        let visit = willVisit.shift();
+        let xpoint = visit.location[0];
+        let ypoint = visit.location[1];
+        let distance = visit.distance;
         
-        var location = que.shift(); // 노드를 꺼냄
-        var y_location = location[0];
-        var x_location = location[1];
-        var distance = location[2];
-        
-        if(y_location === y_goal && x_location === x_goal){
-            return distance;
+        if(maps[ypoint][xpoint] !== 0){
+            if(xpoint===ENEMY_XPOINT && ypoint===ENEMY_YPOINT){
+                return distance;
+            }
+            
+          if(xpoint-1 >=0){
+              willVisit.push(new Location_info([xpoint-1,ypoint],distance+1));  
+          } 
+          if(xpoint+1 <= ENEMY_XPOINT){
+              willVisit.push(new Location_info([xpoint+1,ypoint],distance+1));
+          }  
+          if(ypoint-1 >= 0){
+              willVisit.push(new Location_info([xpoint,ypoint-1],distance+1));
+          }  
+          if(ypoint+1 <= ENEMY_YPOINT){
+              willVisit.push(new Location_info([xpoint,ypoint+1],distance+1));
+          }  
+              maps[ypoint][xpoint] = 0;
+                
         }
-        else if(y_location<0 || y_location > y_goal || x_location<0 || x_location > x_goal){
-            continue;
-        }
-        
-        if(maps[y_location][x_location]){ // 방문할 노드인지 확인            
-            que.push([y_location+1, x_location, distance+1]);
-            que.push([y_location-1, x_location, distance+1]);
-            que.push([y_location, x_location+1, distance+1]);
-            que.push([y_location, x_location-1, distance+1]);
-            maps[y_location][x_location] = 0; // 방문처리
-        }
-        
+
     }
     
     return -1;
